@@ -1,0 +1,27 @@
+{
+  "name": "TUFTI流・引き寄せゲーム",
+  "short_name": "TUFTI",
+  "description": "現実は戦うものではなく、選ぶもの。あなただけの世界線を創造しよう。",
+  "start_url": "./index.html",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "background_color": "#0A0014",
+  "theme_color": "#4A148C",
+  "lang": "ja",
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["games", "lifestyle"],
+  "screenshots": []
+}

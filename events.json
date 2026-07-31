@@ -1,0 +1,44 @@
+[
+  {
+    "description": "新しい出会いがある",
+    "choices": [
+      { "text": "積極的に話しかける", "rp": 5 },
+      { "text": "様子を見る", "rp": 2 }
+    ],
+    "category": "人間関係",
+    "rarity": "common",
+    "levelRequirement": 1,
+    "probability": 1.0,
+    "voiceId": "eventVoice1",
+    "bgImageId": "bg1",
+    "effectId": "sparkle"
+  },
+  {
+    "description": "健康診断の結果が届く",
+    "choices": [
+      { "text": "運動を始める", "rp": 4 },
+      { "text": "そのまま", "rp": 1 }
+    ],
+    "category": "健康",
+    "rarity": "common",
+    "levelRequirement": 1,
+    "probability": 1.0,
+    "voiceId": "eventVoice2",
+    "bgImageId": "bg2",
+    "effectId": "pulse"
+  },
+  {
+    "description": "仕事で重要なプレゼンがある",
+    "choices": [
+      { "text": "全力で準備する", "rp": 6 },
+      { "text": "流れに任せる", "rp": 2 }
+    ],
+    "category": "仕事",
+    "rarity": "uncommon",
+    "levelRequirement": 2,
+    "probability": 0.8,
+    "voiceId": "eventVoice3",
+    "bgImageId": "bg3",
+    "effectId": "glow"
+  }
+]

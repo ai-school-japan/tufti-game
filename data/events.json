@@ -1,0 +1,482 @@
+[
+  {
+    "id": "evt_001",
+    "title": "運命の出会い",
+    "description": "通勤電車の中で、不思議と目が合う人がいた。",
+    "category": "愛",
+    "rarity": "common",
+    "levelRequirement": 1,
+    "probability": 0.8,
+    "bgImageId": "love_bg",
+    "effectId": "sparkle",
+    "mikoVoiceId": "choice",
+    "choices": [
+      { "text": "微笑みを返す", "rp": 5, "worldLineBonus": "愛" },
+      { "text": "そっと目を逸らす", "rp": 2, "worldLineBonus": null }
+    ]
+  },
+  {
+    "id": "evt_002",
+    "title": "心の声",
+    "description": "大切な人に、ずっと伝えられなかった言葉がある。",
+    "category": "愛",
+    "rarity": "uncommon",
+    "levelRequirement": 2,
+    "probability": 0.6,
+    "bgImageId": "love_bg",
+    "effectId": "hearts",
+    "mikoVoiceId": "choice",
+    "choices": [
+      { "text": "今日こそ伝える", "rp": 8, "worldLineBonus": "愛" },
+      { "text": "タイミングを待つ", "rp": 3, "worldLineBonus": null }
+    ]
+  },
+  {
+    "id": "evt_003",
+    "title": "赤い糸",
+    "description": "昔の恋人からメッセージが届いた。",
+    "category": "愛",
+    "rarity": "rare",
+    "levelRequirement": 3,
+    "probability": 0.3,
+    "bgImageId": "love_bg",
+    "effectId": "glow",
+    "mikoVoiceId": "choice",
+    "choices": [
+      { "text": "返信する", "rp": 6, "worldLineBonus": "愛" },
+      { "text": "新しい未来を選ぶ", "rp": 7, "worldLineBonus": "挑戦" }
+    ]
+  },
+  {
+    "id": "evt_004",
+    "title": "朝の目覚め",
+    "description": "今日は清々しく目覚めた。体が軽い。",
+    "category": "健康",
+    "rarity": "common",
+    "levelRequirement": 1,
+    "probability": 0.9,
+    "bgImageId": "health_bg",
+    "effectId": "shine",
+    "mikoVoiceId": "reward",
+    "choices": [
+      { "text": "朝のルーティンを始める", "rp": 5, "worldLineBonus": "健康" },
+      { "text": "もう少し休む", "rp": 1, "worldLineBonus": null }
+    ]
+  },
+  {
+    "id": "evt_005",
+    "title": "身体からのサイン",
+    "description": "最近、少し疲れを感じている。",
+    "category": "健康",
+    "rarity": "common",
+    "levelRequirement": 1,
+    "probability": 0.7,
+    "bgImageId": "health_bg",
+    "effectId": "heal",
+    "mikoVoiceId": "mission",
+    "choices": [
+      { "text": "今日は早く寝る", "rp": 4, "worldLineBonus": "健康" },
+      { "text": "栄養のある食事を取る", "rp": 4, "worldLineBonus": "健康" }
+    ]
+  },
+  {
+    "id": "evt_006",
+    "title": "奇跡の回復",
+    "description": "ずっと悩んでいた体の不調が改善されてきた。",
+    "category": "健康",
+    "rarity": "rare",
+    "levelRequirement": 3,
+    "probability": 0.25,
+    "bgImageId": "health_bg",
+    "effectId": "aurora",
+    "mikoVoiceId": "reward",
+    "choices": [
+      { "text": "感謝して生活習慣を整える", "rp": 10, "worldLineBonus": "感謝" },
+      { "text": "さらなる健康を目指す", "rp": 8, "worldLineBonus": "健康" }
+    ]
+  },
+  {
+    "id": "evt_007",
+    "title": "思わぬ収入",
+    "description": "忘れていた口座に残高があった。",
+    "category": "お金",
+    "rarity": "uncommon",
+    "levelRequirement": 2,
+    "probability": 0.5,
+    "bgImageId": "money_bg",
+    "effectId": "coins",
+    "mikoVoiceId": "reward",
+    "choices": [
+      { "text": "投資に回す", "rp": 7, "worldLineBonus": "お金" },
+      { "text": "大切な人に使う", "rp": 6, "worldLineBonus": "愛" }
+    ]
+  },
+  {
+    "id": "evt_008",
+    "title": "豊かさの流れ",
+    "description": "お金のブロックを外すチャンスが来た。",
+    "category": "お金",
+    "rarity": "common",
+    "levelRequirement": 1,
+    "probability": 0.7,
+    "bgImageId": "money_bg",
+    "effectId": "sparkle",
+    "mikoVoiceId": "choice",
+    "choices": [
+      { "text": "感謝の気持ちを持つ", "rp": 5, "worldLineBonus": "感謝" },
+      { "text": "新しいスキルを身につける", "rp": 6, "worldLineBonus": "仕事" }
+    ]
+  },
+  {
+    "id": "evt_009",
+    "title": "夢の報酬",
+    "description": "長年夢見ていた収入を手にするチャンスが訪れた。",
+    "category": "お金",
+    "rarity": "legendary",
+    "levelRequirement": 5,
+    "probability": 0.1,
+    "bgImageId": "money_bg",
+    "effectId": "golden_glow",
+    "mikoVoiceId": "reward",
+    "choices": [
+      { "text": "勇気を持って挑戦する", "rp": 15, "worldLineBonus": "挑戦" },
+      { "text": "慎重に準備する", "rp": 10, "worldLineBonus": "仕事" }
+    ]
+  },
+  {
+    "id": "evt_010",
+    "title": "重要な提案",
+    "description": "上司から大きなプロジェクトを任された。",
+    "category": "仕事",
+    "rarity": "uncommon",
+    "levelRequirement": 2,
+    "probability": 0.6,
+    "bgImageId": "work_bg",
+    "effectId": "spark",
+    "mikoVoiceId": "mission",
+    "choices": [
+      { "text": "全力で取り組む", "rp": 8, "worldLineBonus": "仕事" },
+      { "text": "チームに頼る", "rp": 6, "worldLineBonus": "人間関係" }
+    ]
+  },
+  {
+    "id": "evt_011",
+    "title": "才能の開花",
+    "description": "自分でも気づかなかった才能を発見した。",
+    "category": "仕事",
+    "rarity": "rare",
+    "levelRequirement": 3,
+    "probability": 0.3,
+    "bgImageId": "work_bg",
+    "effectId": "glow",
+    "mikoVoiceId": "reward",
+    "choices": [
+      { "text": "その道を本格的に追う", "rp": 10, "worldLineBonus": "成長" },
+      { "text": "副業として育てる", "rp": 7, "worldLineBonus": "自由" }
+    ]
+  },
+  {
+    "id": "evt_012",
+    "title": "職場の変化",
+    "description": "職場に新しい風が吹いてきた。",
+    "category": "仕事",
+    "rarity": "common",
+    "levelRequirement": 1,
+    "probability": 0.8,
+    "bgImageId": "work_bg",
+    "effectId": "breeze",
+    "mikoVoiceId": "choice",
+    "choices": [
+      { "text": "変化を歓迎する", "rp": 5, "worldLineBonus": "挑戦" },
+      { "text": "自分のスタイルを守る", "rp": 4, "worldLineBonus": "自由" }
+    ]
+  },
+  {
+    "id": "evt_013",
+    "title": "古い友人からの連絡",
+    "description": "長い間連絡が途絶えていた友人から突然メッセージが届いた。",
+    "category": "人間関係",
+    "rarity": "common",
+    "levelRequirement": 1,
+    "probability": 0.75,
+    "bgImageId": "relation_bg",
+    "effectId": "sparkle",
+    "mikoVoiceId": "choice",
+    "choices": [
+      { "text": "すぐに返信して再会を約束する", "rp": 6, "worldLineBonus": "人間関係" },
+      { "text": "温かい言葉を送る", "rp": 4, "worldLineBonus": "愛" }
+    ]
+  },
+  {
+    "id": "evt_014",
+    "title": "信頼の絆",
+    "description": "困っている人を見て、助けるかどうか迷っている。",
+    "category": "人間関係",
+    "rarity": "common",
+    "levelRequirement": 1,
+    "probability": 0.8,
+    "bgImageId": "relation_bg",
+    "effectId": "hearts",
+    "mikoVoiceId": "choice",
+    "choices": [
+      { "text": "迷わず手を差し伸べる", "rp": 7, "worldLineBonus": "感謝" },
+      { "text": "状況を確認してから動く", "rp": 4, "worldLineBonus": null }
+    ]
+  },
+  {
+    "id": "evt_015",
+    "title": "新たな縁",
+    "description": "思いがけない場所で、共鳴する人と出会った。",
+    "category": "人間関係",
+    "rarity": "uncommon",
+    "levelRequirement": 2,
+    "probability": 0.5,
+    "bgImageId": "relation_bg",
+    "effectId": "aurora",
+    "mikoVoiceId": "reward",
+    "choices": [
+      { "text": "深く繋がる", "rp": 8, "worldLineBonus": "人間関係" },
+      { "text": "自然な流れに任せる", "rp": 5, "worldLineBonus": "自由" }
+    ]
+  },
+  {
+    "id": "evt_016",
+    "title": "魂の自由",
+    "description": "ずっとやりたかったことをやる勇気が湧いてきた。",
+    "category": "自由",
+    "rarity": "uncommon",
+    "levelRequirement": 2,
+    "probability": 0.6,
+    "bgImageId": "freedom_bg",
+    "effectId": "breeze",
+    "mikoVoiceId": "mission",
+    "choices": [
+      { "text": "今すぐ行動する", "rp": 9, "worldLineBonus": "挑戦" },
+      { "text": "計画を立てる", "rp": 6, "worldLineBonus": "仕事" }
+    ]
+  },
+  {
+    "id": "evt_017",
+    "title": "境界線を超えて",
+    "description": "制限だと思っていたものが、実は思い込みだと気づいた。",
+    "category": "自由",
+    "rarity": "rare",
+    "levelRequirement": 4,
+    "probability": 0.3,
+    "bgImageId": "freedom_bg",
+    "effectId": "glow",
+    "mikoVoiceId": "reward",
+    "choices": [
+      { "text": "思い込みを手放す", "rp": 10, "worldLineBonus": "自由" },
+      { "text": "新しい自分を生きる", "rp": 10, "worldLineBonus": "成長" }
+    ]
+  },
+  {
+    "id": "evt_018",
+    "title": "自分らしい道",
+    "description": "周囲の期待と、自分の望みが交差している。",
+    "category": "自由",
+    "rarity": "common",
+    "levelRequirement": 1,
+    "probability": 0.7,
+    "bgImageId": "freedom_bg",
+    "effectId": "sparkle",
+    "mikoVoiceId": "choice",
+    "choices": [
+      { "text": "自分の心に従う", "rp": 7, "worldLineBonus": "自由" },
+      { "text": "バランスを探す", "rp": 5, "worldLineBonus": "人間関係" }
+    ]
+  },
+  {
+    "id": "evt_019",
+    "title": "新しい挑戦",
+    "description": "未知の領域に足を踏み入れるチャンスが訪れた。",
+    "category": "挑戦",
+    "rarity": "common",
+    "levelRequirement": 1,
+    "probability": 0.8,
+    "bgImageId": "challenge_bg",
+    "effectId": "spark",
+    "mikoVoiceId": "mission",
+    "choices": [
+      { "text": "恐れずに飛び込む", "rp": 8, "worldLineBonus": "挑戦" },
+      { "text": "小さな一歩から始める", "rp": 5, "worldLineBonus": "成長" }
+    ]
+  },
+  {
+    "id": "evt_020",
+    "title": "壁を越える力",
+    "description": "大きな困難が目の前に立ちはだかっている。",
+    "category": "挑戦",
+    "rarity": "uncommon",
+    "levelRequirement": 2,
+    "probability": 0.6,
+    "bgImageId": "challenge_bg",
+    "effectId": "lightning",
+    "mikoVoiceId": "mission",
+    "choices": [
+      { "text": "正面から向き合う", "rp": 9, "worldLineBonus": "挑戦" },
+      { "text": "別の道を探す", "rp": 6, "worldLineBonus": "自由" }
+    ]
+  },
+  {
+    "id": "evt_021",
+    "title": "感謝の力",
+    "description": "今日、自分を支えてくれた人たちに気づいた。",
+    "category": "感謝",
+    "rarity": "common",
+    "levelRequirement": 1,
+    "probability": 0.85,
+    "bgImageId": "gratitude_bg",
+    "effectId": "shine",
+    "mikoVoiceId": "reward",
+    "choices": [
+      { "text": "感謝を言葉にして伝える", "rp": 6, "worldLineBonus": "感謝" },
+      { "text": "心の中で深く感謝する", "rp": 5, "worldLineBonus": "感謝" }
+    ]
+  },
+  {
+    "id": "evt_022",
+    "title": "日常の奇跡",
+    "description": "何気ない日常の中に、美しさを見つけた。",
+    "category": "感謝",
+    "rarity": "common",
+    "levelRequirement": 1,
+    "probability": 0.8,
+    "bgImageId": "gratitude_bg",
+    "effectId": "sparkle",
+    "mikoVoiceId": "reward",
+    "choices": [
+      { "text": "その瞬間を大切にする", "rp": 5, "worldLineBonus": "奇跡" },
+      { "text": "記録として残す", "rp": 4, "worldLineBonus": "成長" }
+    ]
+  },
+  {
+    "id": "evt_023",
+    "title": "宇宙の幸運",
+    "description": "すべてが奇跡的にうまく回っている感覚がある。",
+    "category": "奇跡",
+    "rarity": "rare",
+    "levelRequirement": 3,
+    "probability": 0.25,
+    "bgImageId": "miracle_bg",
+    "effectId": "aurora",
+    "mikoVoiceId": "reward",
+    "choices": [
+      { "text": "この流れを信頼する", "rp": 10, "worldLineBonus": "奇跡" },
+      { "text": "さらなる奇跡を招く行動をする", "rp": 12, "worldLineBonus": "奇跡" }
+    ]
+  },
+  {
+    "id": "evt_024",
+    "title": "シンクロニシティ",
+    "description": "考えていた人から突然連絡があった。",
+    "category": "奇跡",
+    "rarity": "uncommon",
+    "levelRequirement": 2,
+    "probability": 0.4,
+    "bgImageId": "miracle_bg",
+    "effectId": "glow",
+    "mikoVoiceId": "reward",
+    "choices": [
+      { "text": "宇宙のサインとして受け取る", "rp": 8, "worldLineBonus": "奇跡" },
+      { "text": "縁を大切にする", "rp": 6, "worldLineBonus": "人間関係" }
+    ]
+  },
+  {
+    "id": "evt_025",
+    "title": "内なる成長",
+    "description": "昨日の自分と、今日の自分が違うと感じる。",
+    "category": "成長",
+    "rarity": "common",
+    "levelRequirement": 1,
+    "probability": 0.8,
+    "bgImageId": "growth_bg",
+    "effectId": "shine",
+    "mikoVoiceId": "levelup",
+    "choices": [
+      { "text": "変化を楽しむ", "rp": 6, "worldLineBonus": "成長" },
+      { "text": "さらに深く学ぶ", "rp": 7, "worldLineBonus": "成長" }
+    ]
+  },
+  {
+    "id": "evt_026",
+    "title": "意識の進化",
+    "description": "ずっと悩んでいた問題が、急に解決策が見えてきた。",
+    "category": "成長",
+    "rarity": "uncommon",
+    "levelRequirement": 2,
+    "probability": 0.55,
+    "bgImageId": "growth_bg",
+    "effectId": "aurora",
+    "mikoVoiceId": "reward",
+    "choices": [
+      { "text": "直感を信じて動く", "rp": 8, "worldLineBonus": "挑戦" },
+      { "text": "その解決策を実行する", "rp": 9, "worldLineBonus": "成長" }
+    ]
+  },
+  {
+    "id": "evt_027",
+    "title": "現実創造の瞬間",
+    "description": "想像していたことが現実になり始めた。",
+    "category": "奇跡",
+    "rarity": "legendary",
+    "levelRequirement": 7,
+    "probability": 0.05,
+    "bgImageId": "miracle_bg",
+    "effectId": "golden_glow",
+    "mikoVoiceId": "ending",
+    "choices": [
+      { "text": "さらに大きな現実を描く", "rp": 20, "worldLineBonus": "奇跡" },
+      { "text": "今ある奇跡に感謝する", "rp": 15, "worldLineBonus": "感謝" }
+    ]
+  },
+  {
+    "id": "evt_028",
+    "title": "旅の始まり",
+    "description": "新しい旅が始まる予感がする。",
+    "category": "挑戦",
+    "rarity": "common",
+    "levelRequirement": 1,
+    "probability": 0.9,
+    "bgImageId": "challenge_bg",
+    "effectId": "breeze",
+    "mikoVoiceId": "welcome",
+    "choices": [
+      { "text": "喜んで旅立つ", "rp": 5, "worldLineBonus": "挑戦" },
+      { "text": "しっかり準備してから出発する", "rp": 4, "worldLineBonus": "仕事" }
+    ]
+  },
+  {
+    "id": "evt_029",
+    "title": "直感のメッセージ",
+    "description": "何か大切なことに気づくべき時が来た。",
+    "category": "成長",
+    "rarity": "uncommon",
+    "levelRequirement": 2,
+    "probability": 0.6,
+    "bgImageId": "growth_bg",
+    "effectId": "glow",
+    "mikoVoiceId": "mission",
+    "choices": [
+      { "text": "瞑想して内側と繋がる", "rp": 7, "worldLineBonus": "成長" },
+      { "text": "日記に書き記す", "rp": 5, "worldLineBonus": "成長" }
+    ]
+  },
+  {
+    "id": "evt_030",
+    "title": "世界線の扉",
+    "description": "どの未来を選ぶかは、今この瞬間の選択にかかっている。",
+    "category": "奇跡",
+    "rarity": "rare",
+    "levelRequirement": 4,
+    "probability": 0.2,
+    "bgImageId": "miracle_bg",
+    "effectId": "aurora",
+    "mikoVoiceId": "choice",
+    "choices": [
+      { "text": "最高の未来を選ぶ", "rp": 12, "worldLineBonus": "奇跡" },
+      { "text": "心が喜ぶ方へ進む", "rp": 10, "worldLineBonus": "自由" }
+    ]
+  }
+]

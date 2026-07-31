@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0A0014" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="description" content="現実は戦うものではなく、選ぶもの。TUFTI流・引き寄せゲームで、あなただけの世界線を創造しよう。" />
+  <title>TUFTI流・引き寄せゲーム</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Particle background (JS-enhanced) -->
+  <div id="particle-bg"></div>
+
+  <!-- Toast notifications -->
+  <div id="toast-container" aria-live="polite"></div>
+
+  <!-- Main app root -->
+  <div id="app"></div>
+
+  <!-- Bottom Navigation (shown after login) -->
+  <nav id="bottom-nav" class="bottom-nav hidden" aria-label="メインナビゲーション">
+    <button class="nav-item active" id="nav-game" aria-label="ゲーム">
+      <span class="nav-icon" aria-hidden="true">🌙</span>
+      <span class="nav-label">世界線</span>
+    </button>
+    <button class="nav-item" id="nav-profile" aria-label="プロフィール">
+      <span class="nav-icon" aria-hidden="true">✨</span>
+      <span class="nav-label">プロフィール</span>
+    </button>
+  </nav>
+
+  <script src="main.js"></script>
+</body>
+</html>

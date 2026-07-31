@@ -1,0 +1,102 @@
+[
+  {
+    "level": 1,
+    "name": "旅人",
+    "xpRequired": 0,
+    "xpToNext": 50,
+    "title": "世界線の旅人",
+    "description": "現実の旅を始めたばかり。",
+    "unlockedWorlds": ["love", "health", "money", "work", "relations", "challenge", "gratitude", "growth"],
+    "mikoMessage": "旅人として最初の一歩を踏み出したわ。"
+  },
+  {
+    "level": 2,
+    "name": "探求者",
+    "xpRequired": 50,
+    "xpToNext": 100,
+    "title": "世界線の探求者",
+    "description": "現実の深さを探り始めた。",
+    "unlockedWorlds": ["freedom"],
+    "mikoMessage": "意識が広がってきたわ。自由の世界線が開いたよ。"
+  },
+  {
+    "level": 3,
+    "name": "覚醒者",
+    "xpRequired": 150,
+    "xpToNext": 200,
+    "title": "覚醒した意識",
+    "description": "現実創造の仕組みに気づき始めた。",
+    "unlockedWorlds": ["miracle"],
+    "mikoMessage": "奇跡の世界線が開いたわ…あなたは特別なの。"
+  },
+  {
+    "level": 4,
+    "name": "創造者",
+    "xpRequired": 350,
+    "xpToNext": 300,
+    "title": "現実の創造者",
+    "description": "自分の現実を意図的に創造できる。",
+    "unlockedWorlds": [],
+    "mikoMessage": "現実創造者としての意識が芽生えたわ。"
+  },
+  {
+    "level": 5,
+    "name": "世界線マスター",
+    "xpRequired": 650,
+    "xpToNext": 400,
+    "title": "世界線の支配者",
+    "description": "複数の世界線を自在に操る力を持つ。",
+    "unlockedWorlds": [],
+    "mikoMessage": "世界線を超えた存在になりつつあるわ。"
+  },
+  {
+    "level": 6,
+    "name": "時空の扉守",
+    "xpRequired": 1050,
+    "xpToNext": 500,
+    "title": "時空の扉を守る者",
+    "description": "時間と空間を超えた認識を持つ。",
+    "unlockedWorlds": [],
+    "mikoMessage": "時空の扉を開く力があなたにあるわ。"
+  },
+  {
+    "level": 7,
+    "name": "奇跡の語り部",
+    "xpRequired": 1550,
+    "xpToNext": 700,
+    "title": "奇跡を語る者",
+    "description": "自らが奇跡の源となり、他者にも影響を与える。",
+    "unlockedWorlds": [],
+    "mikoMessage": "伝説の世界線イベントが解放されたわ。"
+  },
+  {
+    "level": 8,
+    "name": "宇宙の使者",
+    "xpRequired": 2250,
+    "xpToNext": 1000,
+    "title": "宇宙からの使者",
+    "description": "宇宙の意志を体現する存在。",
+    "unlockedWorlds": [],
+    "mikoMessage": "宇宙があなたを使者として選んだわ。"
+  },
+  {
+    "level": 9,
+    "name": "神秘の体現者",
+    "xpRequired": 3250,
+    "xpToNext": 1500,
+    "title": "神秘を体現する者",
+    "description": "すべての世界線が透けて見える存在。",
+    "unlockedWorlds": [],
+    "mikoMessage": "もうすぐ頂点に到達するわ…見守っているわ。"
+  },
+  {
+    "level": 10,
+    "name": "現実の神",
+    "xpRequired": 4750,
+    "xpToNext": null,
+    "title": "現実創造の神",
+    "description": "現実のすべてを意のままに創造できる最上位の存在。",
+    "unlockedWorlds": [],
+    "mikoMessage": "あなたは…もう神の領域に達したわ。この世界線の頂点ね。"
+  }
+]
