@@ -16,14 +16,18 @@
 // ================================================================
 
 const CONFIG = {
-  DATA_BASE: './data/',
-  PARTICLE_COUNT: 30,
-  MIKO_TYPING_SPEED: 45,          // ms per character
+  DATA_BASE:   './data/',
+  AUDIO_BASE:  './assets/audio/',   // WAV音声ファイルのフォルダ
+  AUDIO_EXT:   '.wav',              // 拡張子：.wav または .mp3
+  AUDIO_VOL:   0.85,                // 音量 0.0〜1.0
+  PARTICLE_COUNT:    30,
+  MIKO_TYPING_SPEED: 45,            // ms per character
   SCENE_TRANSITION_MS: 350,
   TOAST_DURATION_MS: 3000,
   DAILY_LOGIN_RP: 5,
-  VERSION: '2.0.0',
+  VERSION: '2.1.0',
 };
+
 
 // ================================================================
 // INLINE FALLBACK DATA (used when fetch() fails, e.g. file:// protocol)
@@ -251,11 +255,24 @@ function pickEvent(worldName) {
 // MIKO DIALOGUE
 // ================================================================
 
+// miko.json の1エントリを正規化する（文字列 or {text,voice} 両対応）
+function normalizeMikoEntry(entry) {
+  if (typeof entry === 'string') return { text: entry, voice: '' };
+  return { text: entry.text || '', voice: entry.voice || '' };
+}
+
 function getMikoLine(key) {
   const lines = state.data.miko[key];
-  if (!lines || lines.length === 0) return '…';
-  return lines[Math.floor(Math.random() * lines.length)];
+  if (!lines || lines.length === 0) return { text: '…', voice: '' };
+  const entry = lines[Math.floor(Math.random() * lines.length)];
+  return normalizeMikoEntry(entry);
 }
+
+// テキストだけ取り出すショートカット
+function getMikoText(key) {
+  return getMikoLine(key).text;
+}
+
 
 // ================================================================
 // LEVEL SYSTEM
@@ -299,9 +316,108 @@ function getXPPercent() {
 // ================================================================
 // PARTICLES
 // ================================================================
+// AUDIO SERVICE（WAV / MP3 対応）
+// ================================================================
+
+let _currentAudio  = null;
+let _audioUnlocked = false;
+let _pendingVoice  = null;
+
+// ユーザーの最初のタップ/クリックで音声を解放する
+function _setupAudioUnlock() {
+  const unlock = () => {
+    if (_audioUnlocked) return;
+    _audioUnlocked = true;
+    console.log('[Audio] ユーザー操作により音声を解放しました');
+    if (_pendingVoice) {
+      const v = _pendingVoice;
+      _pendingVoice = null;
+      setTimeout(() => playVoiceFile(v), 50); // 少し待ってから再生
+    }
+  };
+  // capture:true でボタンハンドラより先にキャッチ
+  document.addEventListener('click',      unlock, { once: true, capture: true });
+  document.addEventListener('touchend',   unlock, { once: true, capture: true });
+}
+_setupAudioUnlock();
+
+
+
+/**
+ * 音声ファイルを再生する
+ * 大文字（.WAV）・小文字（.wav）どちらでも自動で試みる
+ * @param {string} voiceFile  例: "うふふ…また来たのね。.WAV"
+ */
+function playVoiceFile(voiceFile) {
+  if (!voiceFile) return;
+
+  // ユーザー操作前は保留
+  if (!_audioUnlocked) {
+    _pendingVoice = voiceFile;
+    return;
+  }
+
+  if (_currentAudio) {
+    _currentAudio.pause();
+    _currentAudio.currentTime = 0;
+  }
+
+  // 拡張子の大文字・小文字バリアントを生成
+  const lastDot = voiceFile.lastIndexOf('.');
+  const base    = voiceFile.slice(0, lastDot);   // 例: 待っていたわ。
+  const ext     = voiceFile.slice(lastDot);       // 例: .wav
+
+  // 日本語ファイル名はURLエンコードが必要（file:// でも http:// でも動く）
+  const encodedBase = encodeURIComponent(base);
+
+  const candidates = [
+    CONFIG.AUDIO_BASE + encodedBase + ext.toLowerCase(), // .wav
+    CONFIG.AUDIO_BASE + encodedBase + ext.toUpperCase(), // .WAV
+    CONFIG.AUDIO_BASE + base        + ext.toLowerCase(), // エンコードなし .wav
+    CONFIG.AUDIO_BASE + base        + ext.toUpperCase(), // エンコードなし .WAV
+  ];
+  const unique = [...new Set(candidates)];
+
+  function tryNext(index) {
+    if (index >= unique.length) {
+      console.warn('[Audio] ファイルが見つかりません:', voiceFile);
+      return;
+    }
+    console.log('[Audio] 試みるパス:', unique[index]);
+    const audio = new Audio(unique[index]);
+    audio.volume = CONFIG.AUDIO_VOL;
+    _currentAudio = audio;
+    audio.play()
+      .then(() => console.log('[Audio] ✅ 再生成功:', unique[index]))
+      .catch(err => {
+        console.warn('[Audio] ❌', err.name, '→ 次を試します');
+        tryNext(index + 1);
+      });
+  }
+
+  tryNext(0);
+}
+
+
+
+
+function stopVoice() {
+  if (_currentAudio) {
+    _currentAudio.pause();
+    _currentAudio.currentTime = 0;
+    _currentAudio = null;
+  }
+}
+
+function setVoiceVolume(vol) {
+  CONFIG.AUDIO_VOL = Math.max(0, Math.min(1, vol));
+  if (_currentAudio) _currentAudio.volume = CONFIG.AUDIO_VOL;
+}
+
 
 function spawnParticles() {
   const bg = document.getElementById('particle-bg');
+
   if (!bg) return;
 
   // Remove existing particles
@@ -430,10 +546,32 @@ function renderMikoPanel(dialogueKey, customText, showPortrait = false) {
   `;
 }
 
-function startMikoTyping(text) {
+/**
+ * 巫女テキストを表示 + 音声を自動再生する
+ *
+ * 音声の優先順位：
+ *   1. miko.json の voice フィールドに書かれたファイル名
+ *   2. セリフのテキストそのままのファイル名（例: うふふ…また来たのね。.wav）
+ *   3. どちらもなければサイレント（字幕のみ）
+ *
+ * @param {string|{text,voice}} entry
+ */
+function startMikoTyping(entry) {
+  const { text, voice } = (typeof entry === 'string')
+    ? { text: entry, voice: '' }
+    : entry;
+
+  // テキスト表示
   const el = document.getElementById('miko-text-content');
   if (el) typeMikoText(el, text);
+
+  // 音声再生：voice フィールドがあればそれを優先、なければテキスト名で探す
+  const voiceFile = voice || `${text}${CONFIG.AUDIO_EXT}`;
+  playVoiceFile(voiceFile);
 }
+
+
+
 
 // ================================================================
 // DAILY MISSIONS
@@ -552,7 +690,8 @@ function renderTemple() {
   resetTheme();
   spawnParticles();
 
-  const welcomeText = getMikoLine('welcome');
+  const welcomeEntry = getMikoLine('welcome');
+  const welcomeText  = welcomeEntry.text;
 
   app.innerHTML = `
     <div id="scene-temple" role="main">
@@ -574,7 +713,7 @@ function renderTemple() {
       ${renderMikoPanel('welcome', welcomeText)}
 
       <button class="btn btn-primary" id="temple-enter-btn" aria-label="神殿に入る">
-        ✦ 神殿へ入る ✦
+        🔊 神殿へ入る ✦
       </button>
 
       <p class="text-muted" style="font-size:0.75rem; letter-spacing:0.08em;">
@@ -583,14 +722,18 @@ function renderTemple() {
     </div>
   `;
 
-  setTimeout(() => startMikoTyping(welcomeText), 500);
+  setTimeout(() => startMikoTyping(welcomeEntry), 500);
+
+
 
   document.getElementById('temple-enter-btn').addEventListener('click', (e) => {
     addRipple(e.currentTarget, e);
+    // ボタンクリック = ユーザージェスチャー → 音声を必ず再生
+    _audioUnlocked = true;
+    playVoiceFile(welcomeEntry.voice || `${welcomeEntry.text}${CONFIG.AUDIO_EXT}`);
     transitionScene(() => {
       if (state.name) {
         handleDailyLogin();
-        // Auto-complete login mission
         completeMission('login');
         saveState();
         renderGame();
@@ -609,7 +752,8 @@ function renderLogin() {
   state.currentScene = 'login';
   document.getElementById('bottom-nav').classList.add('hidden');
 
-  const loginText = getMikoLine('welcome');
+  const loginEntry = getMikoLine('welcome');
+  const loginText  = loginEntry.text;
 
   app.innerHTML = `
     <div id="scene-login" role="main">
@@ -641,7 +785,7 @@ function renderLogin() {
     </div>
   `;
 
-  setTimeout(() => startMikoTyping(loginText), 400);
+  setTimeout(() => startMikoTyping(loginEntry), 400);
 
   const nameInput = document.getElementById('name-input');
   const startBtn  = document.getElementById('login-start-btn');
@@ -685,7 +829,8 @@ function renderGame() {
   const levelData = getCurrentLevelData();
   const xpPct     = getXPPercent();
   const nextLD    = getNextLevelData();
-  const worldText = getMikoLine('worldSelect');
+  const worldEntry = getMikoLine('worldSelect');
+  const worldText  = worldEntry.text;
   const isNewDay  = !state.worldHistory.find(h => h.date === today());
 
   // Show bottom nav
@@ -769,7 +914,7 @@ function renderGame() {
   `;
 
   // Miko typing
-  setTimeout(() => startMikoTyping(worldText), 300);
+  setTimeout(() => startMikoTyping(worldEntry), 300);
 
   // World card click listeners
   document.querySelectorAll('.world-card:not(.locked)').forEach(card => {
@@ -820,9 +965,11 @@ function handleWorldSelect(world) {
   state.currentEvent = evt;
 
   // Show miko message for world
-  const mikoText = world.mikoMessage || getMikoLine('choice');
-  const mikoEl   = document.getElementById('miko-text-content');
-  if (mikoEl) typeMikoText(mikoEl, mikoText);
+  const worldMikoEntry = (world.mikoMessage)
+    ? { text: world.mikoMessage, voice: `${world.mikoMessage}${CONFIG.AUDIO_EXT}` }
+    : getMikoLine('choice');
+  const mikoEl = document.getElementById('miko-text-content');
+  if (mikoEl) startMikoTyping(worldMikoEntry);
 
   // Show event after short delay
   setTimeout(() => renderEvent(evt), 600);
@@ -837,16 +984,18 @@ function renderEvent(evt) {
   if (!eventArea) return;
 
   if (!evt) {
-    const noEvtText = getMikoLine('noEvent');
+    const noEvtEntry = getMikoLine('noEvent');
     eventArea.classList.remove('hidden');
     eventArea.innerHTML = `
       <div class="glass-card event-card">
-        <p class="event-description text-center">${noEvtText}</p>
+        <p class="event-description text-center">${noEvtEntry.text}</p>
         <button class="btn btn-ghost" id="next-day-btn" style="width:100%; margin-top:var(--space-md);">
           また明日
         </button>
       </div>
     `;
+    // 音声再生
+    startMikoTyping(noEvtEntry);
     document.getElementById('next-day-btn')?.addEventListener('click', () => {
       transitionScene(renderGame);
     });
@@ -896,18 +1045,14 @@ function renderEvent(evt) {
     </div>
   `;
 
-  // Start miko typing in event card
+  // Start miko typing in event card (with voice)
   setTimeout(() => {
     const evtMikoEl = document.getElementById('miko-text-content');
-    if (evtMikoEl) typeMikoText(evtMikoEl, getMikoLine(evt.mikoVoiceId || 'choice'));
+    if (evtMikoEl) {
+      const mikoEntry = getMikoLine(mikoVoiceKey);
+      startMikoTyping(mikoEntry);
+    }
   }, 300);
-
-  // Miko voice for rarity
-  const rarityMikoText = getMikoLine(mikoVoiceKey);
-  const mikoEl = document.getElementById('miko-text-content');
-  if (mikoEl) {
-    setTimeout(() => typeMikoText(mikoEl, rarityMikoText), 200);
-  }
 
   // Scroll to event
   eventArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -964,7 +1109,8 @@ function renderResult(rpGain, xpGain, choice, didLevelUp, evt) {
 
   const world     = state.currentWorld;
   const mikoKey   = didLevelUp ? 'levelup' : (evt?.mikoVoiceId || 'reward');
-  const mikoText  = didLevelUp ? getMikoLine('levelup') : getMikoLine(mikoKey);
+  const mikoEntry  = getMikoLine(mikoKey);
+  const mikoText   = mikoEntry.text;
   const resultEmoji = didLevelUp ? '🌟' : (rpGain >= 10 ? '✨' : '💫');
 
   const levelData  = getCurrentLevelData();
@@ -1046,10 +1192,13 @@ function renderResult(rpGain, xpGain, choice, didLevelUp, evt) {
   if (lvDisp) lvDisp.textContent = state.level;
   if (xpBar)  xpBar.style.width  = xpPct + '%';
 
-  // Miko typing for result
+  // Miko typing + 音声再生
   setTimeout(() => {
     const el = document.getElementById('result-miko-text');
-    if (el) typeMikoText(el, mikoText);
+    if (el) {
+      typeMikoText(el, mikoText);
+      playVoiceFile(mikoEntry.voice || `${mikoText}${CONFIG.AUDIO_EXT}`);
+    }
   }, 200);
 
   eventArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
