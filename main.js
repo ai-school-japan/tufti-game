@@ -390,6 +390,10 @@ function playVoiceFile(voiceFile) {
     audio.play()
       .then(() => console.log('[Audio] ✅ 再生成功:', unique[index]))
       .catch(err => {
+        if (err.name === 'AbortError') {
+          // 別の音声が再生されて中断された場合は次の候補を試さない
+          return;
+        }
         console.warn('[Audio] ❌', err.name, '→ 次を試します');
         tryNext(index + 1);
       });
@@ -561,9 +565,12 @@ function startMikoTyping(entry) {
     ? { text: entry, voice: '' }
     : entry;
 
+  // テキストの {name} をプレイヤー名に置換する
+  const displayText = text.replace(/{name}/g, state.name || 'あなた');
+
   // テキスト表示
   const el = document.getElementById('miko-text-content');
-  if (el) typeMikoText(el, text);
+  if (el) typeMikoText(el, displayText);
 
   // 音声再生：voice フィールドがあればそれを優先、なければテキスト名で探す
   const voiceFile = voice || `${text}${CONFIG.AUDIO_EXT}`;
